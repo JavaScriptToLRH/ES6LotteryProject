@@ -21,22 +21,22 @@ ES6构建彩票项目
 ```
   ES6LotteryProject  
   | --- app（放置前端代码）  
-  | --- &nbsp;&nbsp;| -------- CSS（存放样式文件）  
-  | --- &nbsp;&nbsp;| -------- js（存放JavaScript文件）  
-  | --- &nbsp;&nbsp;| -------- &nbsp;| -------- class（存放ES6 class 类）  
-  | --- &nbsp;&nbsp;| -------- &nbsp;| -------- index.js（入口文件）  
-  | --- &nbsp;&nbsp;| -------- views（存放模板文件，html）
-  | --- &nbsp;&nbsp;| -------- &nbsp;| -------- error.ejs（错误模板文件）
-  | --- &nbsp;&nbsp;| -------- &nbsp;| -------- index.ejs（入口模板文件）
+  | ---  | -------- CSS（存放样式文件）  
+  | ---  | -------- js（存放JavaScript文件）  
+  | ---  | --------  | -------- class（存放ES6 class 类）  
+  | ---  | --------  | -------- index.js（入口文件）  
+  | ---  | -------- views（存放模板文件，html）
+  | ---  | --------  | -------- error.ejs（错误模板文件）
+  | ---  | --------  | -------- index.ejs（入口模板文件）
   | --- server（服务器目录）
   | --- tasks（构建工具目录）
-  | --- &nbsp;&nbsp;| -------- util（放置常用脚本）
+  | ---  | -------- util（放置常用脚本）
   | --- .babelrc（babel配置文件，ES6转ES5）
   | --- gulpfile.babel.js（gulp配置文件）
   | --- package.json（安装依赖包过程中，需要有package.json文件）
   注：
-  1. 在模板文件夹中创建 `.ejs` 文件，是因为创建的服务器代码是通过 `express` node框架创建的，此框架使用的模板引擎为 ejs引擎。可以当做 HTML 使用。
-  2. 创建 `gulpfile.babel.js`：Gulp官网中为创建 `gulpfile.js` 文件，因为此项目中使用ES6构建脚本，如果不加 `.babel` ，在执行构建脚本时会报错
+  1. 在模板文件夹中创建 .ejs 文件，是因为创建的服务器代码是通过 express Node框架创建的，此框架使用的模板引擎为 ejs引擎。可以当做 HTML 使用。
+  2. 创建 gulpfile.babel.js：Gulp官网中为创建 gulpfile.js 文件，因为此项目中使用ES6构建脚本，如果不加 .babel ，在执行构建脚本时会报错
 ```
 
 #### 安装教程
