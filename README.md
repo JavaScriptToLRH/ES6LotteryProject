@@ -43,6 +43,26 @@ ES6构建彩票项目
 
 1. 全局安装express、express-generator： `npm install -g express` `npm install -g express-generator`
 2. 在服务器目录server中执行`express -e .` ：`express`表示安装`express` , `-e`表示使用`ejs`作为模板 , `.`表示当前目录中
+3. 执行 `gulp` 所有脚本只执行一次；执行 `gulp --watch` 才能进行监听
    
 注：
 * 通过应用生成器工具 `express-generator` 可以快速创建一个应用的骨架。
+
+### 错误与解决方法
+1. Q：Failed to load external module @babel/register  
+   A：gulp@3.9.1会出现此问题，安装gulp@3.9.0即可 `npm i -g gulp@3.9.0`
+2. Q：gulp中使用 webpack 4.0 版本报错  
+   A：webpack 4.0 版本语法与之前版本不同，所以对应在 gulp 中的使用也需要变更，变更如下：  
+      ```
+      {
+        mode: 'production',
+        module: {
+          rules: [
+            {
+              test: /\.js$/,
+              use: 'babel-loader'
+            }
+          ]
+        }
+      }
+      ```
