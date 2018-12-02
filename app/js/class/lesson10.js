@@ -111,3 +111,89 @@
   weakmap.set(o, 123);
   console.log(weakmap.get(o)); // 123
 }
+
+// Map Set 与 数组和对象 的比较
+
+// 数据结构横向对比：增、查、改、删
+{
+  // Map 和 数组 的对比
+  let map = new Map();
+  let array = [];
+  // 增
+  map.set('t', 1);
+  array.push({t: 1});
+  console.info('增 map - array：', map, array); // Map(1) {"t" => 1} [{t: 1}]
+  // 查
+  let map_exist = map.has('t');
+  let array_exist = array.find(item => item.t);
+  console.info('查 map - array：', map_exist, array_exist); // true {t: 1}
+  // 改
+  map.set('t', 2);
+  array.forEach(item => item.t ? item.t = 2: '');
+  console.info('改 map - array：', map, array); // Map(1) {"t" => 2} [{t: 2}]
+  // 删
+  map.delete('t');
+  let index = array.findIndex(item => item.t);
+  array.splice(index, 1);
+  console.info('删 map - array：', map, array); // Map(0) {} []
+}
+
+{
+  // Set 和 数组 的对比
+  let set = new Set();
+  let array = [];
+  // 增
+  set.add({t: 1}); // 此处注意与 Map 的区别
+  array.push({t: 1});
+  console.info('增 set - array：', set, array);
+  // 查
+  let set_exist = set.has({t: 1});
+  // 此处返回为 false
+  // set.has({t: 1}) 为新生成的一个对象，set.add({t: 1}) 也是新生成的一个对象
+  // 在查询是一般先将对象 {t: 1} 保存为一个变量
+  let array_exist = array.find(item => item.t);
+  console.info('查 set - array：', set_exist, array_exist); // false {t: 1}
+  // 改
+  set.forEach(item => item.t ? item.t = 2 : '');
+  // 如果通过 add ，则会新增一个对象，与 Set 中的对象存在冲突
+  // 对于 Set 的修改也是通过 forEach。除非在查询的时候，对象以及被引用过，直接修改引用对象也是可以的
+  array.forEach(item => item.t ? item.t = 2 : '');
+  console.info('改 set - array', set, array);
+  // 删除
+  set.forEach(item => item.t ? set.delete(item) : '')
+  let index = array.findIndex(item => item.t);
+  array.splice(index, 1);
+  console.info('删 set - array：', set, array); // Set(0) {} []
+}
+
+{
+  // Map Set object 的对比
+  let item = {t: 1};
+  let map = new Map();
+  let set = new Set();
+  let obj = {}
+
+  // 增
+  map.set('t', 1);
+  set.add(item);
+  obj['t'] = 1;
+  console.info('增 Map - Set - Obj', map, set, obj);
+  // 查
+  console.info({
+    map_exist: map.set('t'),
+    set_exist: set.has(item),
+    obj_exist: 't' in obj
+  })
+  // 改
+  map.set('t', 2);
+  item.t = 2; // 直接修改数据元素，而 Set 本身不做变化，其存储为引用
+  obj['t'] = 2;
+  console.info('改 Map - Set - Obj', map, set, obj);
+  // 删
+  map.delete('t');
+  set.delete(item);
+  delete obj['t'];
+  console.info('删 Map - Set - Obj', map, set, obj);
+}
+
+// 建议：对于数据结构的存储，优先使用 Map，如果对数据要求比较高，保证每个数据的唯一性，考虑使用 Set
