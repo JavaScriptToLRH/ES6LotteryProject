@@ -47,7 +47,6 @@
 
 {
   // ES5 ES6 字符串遍历
-  
   let str = '\u{20bb7}abc';
   // ES5
   for (let i = 0; i < str.length; i++) {
