@@ -1,4 +1,5 @@
 // Proxy(代理) 和 Reflect(反射)
+// Proxy需要通过 new， 而 Reflect 则可以直接使用
 
 {
   // Proxy
@@ -8,14 +9,16 @@
     _r: 123
   };
 
-  let monitor = new Proxy(obj, {
+  let monitor = new Proxy(obj, {  // 此处 obj 为所需要代理的对象
+    // 此处实现需要代理的方法，进行一系列代理操作
     // 拦截对象属性的读取
     get (target, key) {
       // target 其实就是为 obj属性
       return target[key].replace('2017', '2018');
     },
-    // 拦截对象设置属性
+    // 拦截设置对象属性
     set (target, key, value) {
+      // 只允许设置 name 属性
       if (key === 'name') {
         return target[key] = value;
       } else {
@@ -24,6 +27,7 @@
     },
     // 拦截 key in object 操作
     has (target, key) {
+      // 只暴露 name 属性
       if (key === 'name') {
         return target[key];
       } else {
@@ -32,6 +36,7 @@
     },
     // 拦截 delete
     deleteProperty (target, key) {
+      // 只允许删除以下划线开头的属性
       if(key.indexOf('_') > -1) {
         delete target[key];
         return true;
@@ -46,6 +51,8 @@
   });
   console.log('get', monitor.time) // 2018-03-11
 
+  // 存在一个类似供应商的 obj 对象，通过 Proxy 新生成一个对象，这个对象是映射 obj 的，然后再中间进行一系列操作。
+  // 用户最终访问的是 monitor，不管用户是读取还是设置 monitor 对象的属性，最终通过 Proxy 对象传递给 obj 对象
   monitor.time = '2018';
   monitor.name = 'lrh';
   console.log('set', monitor.time) // 2018-03-11
