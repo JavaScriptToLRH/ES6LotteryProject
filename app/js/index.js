@@ -29,6 +29,9 @@ import 'babel-polyfill'
 // as 定义一个别名 lesson，暴露出来的方法等，则存放在 lesson 对象中
 // console.log(lesson.a, lesson.test);
 
-import lesson17 from './class/lesson17';
-console.log(lesson17.A);
+// import lesson17 from './class/lesson17';
+// console.log(lesson17.A);
 // 模块化结束
+
+// 彩票
+import lottery from './lottery'
