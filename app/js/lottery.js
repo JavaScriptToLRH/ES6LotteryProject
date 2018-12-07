@@ -12,8 +12,8 @@ const copyProperties = function (target, source) {
     if (key !== 'constructor' && key !== 'prototype' && key !== 'name') {
       let desc = Object.getOwnPropertyDescriptor(source, key);
       // Object.getOwnPropertyDescriptor() 返回指定对象上一个自有属性对应的属性描述符
-      Object.defineProperties(target, key, desc);
-      // Object.defineProperties() 直接在一个对象上定义新的属性或修改现有属性，并返回该对象。
+      Object.defineProperty(target, key, desc);
+      // Object.defineProperty() 方法会直接在一个对象上定义一个新属性,或者修改一个对象的现有属性, 并返回这个对象。
     }
   }
 }
