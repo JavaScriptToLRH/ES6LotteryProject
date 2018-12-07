@@ -55,14 +55,14 @@ class Calculate {
 
       let max_active = Math.min(active, 5);
       if (play[1] - 5 > 0) {
-        if (active - play[1] >= 0) {
-          arr = new Array(active - 5).fill(0);
+        if (max_active - play[1] >= 0) {
+          arr = new Array(max_active - 5).fill(0);
           max = Calculate.combine(arr, play[1] - 5).length;
         } else {
           max = 0;
         }
       } else if (play[1] - 5 < 0) {
-        arr = new Array(Math.min(active, 5).fill(0));
+        arr = new Array(max_active.fill(0));
         max = Calculate.combine(arr, play[1]).length;
       } else {
         max = 1;
