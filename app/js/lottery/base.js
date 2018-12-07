@@ -252,7 +252,7 @@ class Base {
   getTotal () {
     let count = 0;
     $('.codelist li').each(function (index, item) {
-      count += $(item).attr(count) * 1;
+      count += $(item).attr('count') * 1;
     })
     $('#count').text(count);
     $('#money').text(count * 2);

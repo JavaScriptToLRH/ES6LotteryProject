@@ -36,9 +36,7 @@ var makeIssue = function () {
     cur_issue = [end_date.getFullYear(), ('0' + (end_date.getMonth() + 1)).slice(-2), ('0' + end_date.getDate()).slice(-2), ('0' + h).slice(-2)].join('');
   } else {
     // 今天销售已截止
-    if (data.getDate() != end_issue_date.getDate()) { // 如果当前时间不等于结束时间，则将时间调整为下一天
-      first_issue_date.setDate(first_issue_date.getDate() + 1);
-    }
+    first_issue_date.setDate(first_issue_date.getDate() + 1);
     end_time = first_issue_date.getTime();
     cur_issue = [first_issue_date.getFullYear(), ('0' + (first_issue_date.getMonth() + 1)).slice(-2), ('0' + first_issue_date.getDate()).slice(-2), '01'].join('');
   }
