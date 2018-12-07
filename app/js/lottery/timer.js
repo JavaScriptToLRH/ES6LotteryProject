@@ -7,7 +7,7 @@ class Timer {
     // handle 倒计时结束之后回调
     const now = new Date().getTime(); // 获取当前时间
     const self = this; // 用 self 获取当前对象的一个指针
-    if (now - end) {
+    if (now - end > 0) {
       // 如果当前时间大于截止时间，说明倒计时已结束，用传入的 handle 执行倒计时结束之后的回调
       handle.call(self);
     } else {
@@ -30,6 +30,7 @@ class Timer {
         // 对 r.length 进行判断是因为：
         // 1. 如果没有天的时候，天数为0，前面就不能有天出现。
         // 2. 如果天数为 0，则不会出现多少小时多少分
+        // 判断数组 r 长度主要是为了防止数据错乱，例如只有时，没有分，秒的情况
         r.push(`<em>${h}</em>时`)
       }
       if (r.length || m > 0) {
@@ -38,7 +39,8 @@ class Timer {
       if (r.length || s > 0) {
         r.push(`<em>${s}</em>秒`)
       }
-      self.last_time = r.join('');
+      // self.last_time = r.join('');
+      // 执行更新回调函数，使用的是计算之后的倒计时时间
       update.call(self, r.join('')); // 更新时间
       setTimeout(function () { // 重新调用倒计时，达到递减
         self.countdown(end, update, handle);

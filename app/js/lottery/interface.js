@@ -40,7 +40,7 @@ class Interface {
   // 获取开奖号码的接口
   getOpenCode (issue) {
     let self = this;
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, rejet) => {
       $.ajax({
         url: '/get/opencode',
         data: {
@@ -61,7 +61,7 @@ class Interface {
   // 获取当前状态的接口
   getState (issue) {
     let self = this;
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, rejet) => {
       $.ajax({
         url: '/get/state',
         data: {

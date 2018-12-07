@@ -95,7 +95,7 @@ class Base {
    *
    * @memberof Base
    */
-  toggleCodeActive () {
+  toggleCodeActive (e) {
     let self = this;
     let $cur = $(e.currentTarget);
     // currentTarget: 可位于捕获、冒泡和目标阶段；始终指向绑定事件的元素
@@ -184,7 +184,7 @@ class Base {
     let active = $active ? $active.length : 0;
     let count = self.computeCount(active, self.cur_play); // 计算当前注数
     if (count) {
-      self.addCodeItem($active.join(''), self.cur_play, self.play_list.get(self.cur_play).name, count)
+      self.addCodeItem($active.join(' '), self.cur_play, self.play_list.get(self.cur_play).name, count)
     }
   }
 
@@ -251,7 +251,7 @@ class Base {
    */
   getTotal () {
     let count = 0;
-    $('.codeList li').each(function (index, item) {
+    $('.codelist li').each(function (index, item) {
       count += $(item).attr(count) * 1;
     })
     $('#count').text(count);
@@ -283,7 +283,7 @@ class Base {
   getRandomCode (e) {
     e.preventDefault();
     let num = e.currentTarget.getAttribute('count');
-    let paly = this.cur_play.match(/\d+/g)[0];
+    let play = this.cur_play.match(/\d+/g)[0];
     let self = this;
     if (num === '0') {
       $(self.cart_el).html('');

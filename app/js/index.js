@@ -34,4 +34,6 @@ import 'babel-polyfill'
 // 模块化结束
 
 // 彩票
-import lottery from './lottery'
+import Lottery from './lottery'
+
+const syy=new Lottery();

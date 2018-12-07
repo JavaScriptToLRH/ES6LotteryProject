@@ -15,7 +15,7 @@ class Calculate {
     const arr = new Array(active).fill('0'); // 创建一个指定长度为 active 的，并数组填充为 0 的一个数组。同时也是为了进行选中号码的排列组合计算
     if (exist && paly_name.at(0) === 'r') {
       // 判断玩法存在 并且 判断当前玩法的字符串是不是包含 r。此处对玩法的字符串进行检测 r 是否存在，是为了区分玩法
-      count = Calculate.combine(arr, paly_name.split('')[1]); // 进行组合运算
+      count = Calculate.combine(arr, paly_name.split('')[1]).length; // 进行组合运算
       // combine 为静态方法。注意：如果使用类名进行调用，则为静态方法(静态方法使用 static)
     }
     return count
@@ -42,7 +42,7 @@ class Calculate {
           arr = new Array(min_active).fill(0);
           min = Calculate.combine(arr, play[1]).length; // 计算最小的注数
         } else {
-          if (play[1] - 5 > 0 && active - play[1] > 0) {
+          if (play[1] - 5 > 0 && active - play[1] >= 0) {
             arr = new Array(active - 5).fill(0);
             min = Calculate.combine(arr, play[1] - 5).length;
           } else {
@@ -55,20 +55,20 @@ class Calculate {
 
       let max_active = Math.min(active, 5);
       if (play[1] - 5 > 0) {
-        if (max_active - play[1] >= 0) {
-          arr = new Array(max_active - 5).fill(0);
+        if (active - play[1] >= 0) {
+          arr = new Array(active - 5).fill(0);
           max = Calculate.combine(arr, play[1] - 5).length;
         } else {
           max = 0;
         }
       } else if (play[1] - 5 < 0) {
-        arr = new Array(max_active.fill(0));
+        arr = new Array(Math.min(active, 5).fill(0));
         max = Calculate.combine(arr, play[1]).length;
       } else {
         max = 1;
       }
     }
-    return [min, max].map(item => item * self.paly_list.get(paly_name).bonus)
+    return [min, max].map(item => item * self.paly_list.get(paly_name).bonus) //返回金额范围
   }
 
   /**
@@ -90,7 +90,7 @@ class Calculate {
         return;
       } 
       if (size === arrLen) {
-        allResult.push([].concat(result.arr))
+        allResult.push([].concat(result.arr)) // 组合元素的子集
       } else {
         for(let i = 0; i < arrLen; i++) {
           let newResult = [].concat(result);
