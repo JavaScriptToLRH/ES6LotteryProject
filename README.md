@@ -1,24 +1,28 @@
 # ES6LotteryProject
 
-#### 项目介绍
+## 1. 项目介绍
 ES6构建彩票项目
 
-#### ES6项目构建
-1. 业务逻辑：页面、交互
-2. 自动构建：编译（ES6转ES5（如果在IE7，IE8中，可能需要转ES3））、辅助（自动刷新、文件合并、资源压缩）
-3. 服务接口：数据、接口
+## 2.ES6项目构建
 
-#### 任务自动化
-1. 任务自动化：减少人工操作，用电脑自动监听所有操作，自动响应
-2. Gulp：用自动化构建工具增强你的工作流程的一个工具
-   
-#### 编译工具（babel、webpack）
-1. babel：JavaScript的编译器，用于转换ES6语法
-2. webpack：模块化构建工具，用来解决模块化
-3. webpack-stream：webpack对Glup的一个支持
++ 业务逻辑：页面、交互
++ 自动构建：编译（ES6转ES5（如果在IE7，IE8中，可能需要转ES3））、辅助（自动刷新、文件合并、资源压缩）
++ 服务接口：数据、接口
 
-#### 目录结构划分
-```
+## 3. 任务自动化
+
++ 任务自动化：减少人工操作，用电脑自动监听所有操作，自动响应
++ Gulp：用自动化构建工具增强你的工作流程的一个工具
+
+## 4. 编译工具（babel、webpack）
+
++ babel：JavaScript的编译器，用于转换ES6语法
++ webpack：模块化构建工具，用来解决模块化
++ webpack-stream：webpack对Glup的一个支持
+
+## 5. 目录结构划分
+
+``` text
   ES6LotteryProject  
   | --- app（放置前端代码）  
   | ---  | -------- CSS（存放样式文件）  
@@ -39,30 +43,33 @@ ES6构建彩票项目
   2. 创建 gulpfile.babel.js：Gulp官网中为创建 gulpfile.js 文件，因为此项目中使用ES6构建脚本，如果不加 .babel ，在执行构建脚本时会报错
 ```
 
-#### 安装教程
+## 6. 安装教程
 
-1. 全局安装express、express-generator： `npm install -g express` `npm install -g express-generator`
-2. 在服务器目录server中执行`express -e .` ：`express`表示安装`express` , `-e`表示使用`ejs`作为模板 , `.`表示当前目录中
-3. 执行 `gulp` 所有脚本只执行一次；执行 `gulp --watch` 才能进行监听
-   
++ 全局安装express、express-generator： `npm install -g express` `npm install -g express-generator`
++ 在服务器目录server中执行`express -e .` ：`express`表示安装`express` , `-e`表示使用`ejs`作为模板 , `.`表示当前目录中
++ 执行 `gulp` 所有脚本只执行一次；执行 `gulp --watch` 才能进行监听
+
 注：
-* 通过应用生成器工具 `express-generator` 可以快速创建一个应用的骨架。
 
-### 错误与解决方法
-1. Q：Failed to load external module @babel/register  
-   A：gulp@3.9.1会出现此问题，安装gulp@3.9.0即可 `npm i -g gulp@3.9.0`
-2. Q：gulp中使用 webpack 4.0 版本报错  
-   A：webpack 4.0 版本语法与之前版本不同，所以对应在 gulp 中的使用也需要变更，变更如下：  
-      ```
-      {
-        mode: 'production',
-        module: {
-          rules: [
-            {
-              test: /\.js$/,
-              use: 'babel-loader'
-            }
-          ]
-        }
++ 通过应用生成器工具 `express-generator` 可以快速创建一个应用的骨架。
+
+## 7. 错误与解决方法
+
++ Q：Failed to load external module @babel/register  
+  A：gulp@3.9.1会出现此问题，安装gulp@3.9.0即可 `npm i -g gulp@3.9.0`
++ Q：gulp中使用 webpack 4.0 版本报错  
+  A：webpack 4.0 版本语法与之前版本不同，所以对应在 gulp 中的使用也需要变更，变更如下：
+
+  ``` text
+    {
+      mode: 'production',
+      module: {
+        rules: [
+          {
+            test: /\.js$/,
+            use: 'babel-loader'
+          }
+        ]
       }
-      ```
+    }
+  ```
