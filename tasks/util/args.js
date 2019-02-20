@@ -1,4 +1,4 @@
-// 命令号处理
+// 命令行处理
 
 import yargs from 'yargs' // yargs是nodejs环境下的命令行参数解析工具
 

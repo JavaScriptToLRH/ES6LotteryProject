@@ -80,6 +80,10 @@ ES6相关语法可参考 `app/js/class` 目录下的 JavaScript文件
   2. 创建 gulpfile.babel.js：Gulp官网中为创建 gulpfile.js 文件，因为此项目中使用ES6构建脚本，如果不加 .babel ，在执行构建脚本时会报错
 ```
 
+## 5. 项目备注
+
++ [gulp任务自动化参考](./readme/gulp.md)
+
 ## 5.项目展示
 
 ![lottery](./readme/images/lottery.png)
