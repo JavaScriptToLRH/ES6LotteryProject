@@ -4,6 +4,8 @@
 
 本项目使用 ES6 构建彩票项目，主要用于学习 ES6 相关语法。
 
+[ES6相关语法](./app/js/class)
+
 ## 2. 如何运行
 
 + 全局安装express、express-generator： `npm install -g express` `npm install -g express-generator`
