@@ -5,7 +5,8 @@ import $ from 'jquery'
 class Interface {
   // 获取遗落的接口
   getOmit (issue) {
-    let self = this; // 箭头函数的 this 指向是在箭头函数定义的时候，而不是运行时候。
+    let self = this;
+    // 箭头函数的 this 指向是在箭头函数定义的时候，而不是运行时候。所以此处需要将 this 缓存
     return new Promise((resolve, reject) => {
       $.ajax({
         url: '/get/omit',
@@ -14,7 +15,8 @@ class Interface {
         },
         dataType: 'json',
         success: function (res) {
-          self.setOmit(res.data); // 设置遗落数据
+          // 调用 Base类中 setOmit()方法 设置遗落数据
+          self.setOmit(res.data);
           // self.setOmit(res.data) 通过对象的方式保存数据，进行数据的传递，避免了回调。同时，可以达到数据共享的目的
           // setOmit 为某一个类中的一个方法，在 app/js 文件中，lottery(lottery.js) 会多重继承 lottery文件夹中 base、calculate、interface、timer 的这四个类，
           // setOmit 为 base、calculate、interface、timer 四个类中某一个类的方法，所以需要引用 当前this 的这个对象，从而在接口的这个类中可以拿到 setOmit 的这个方法，从而保存当前的数据

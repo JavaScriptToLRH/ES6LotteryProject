@@ -9,10 +9,11 @@ class Base {
    * @memberof Base
    */
   initPlayList () {
-    this.play_list.set('r2', {
-      bonus: 6,
-      tip: '从01~11中任选2个或多个号码，所选号码与开奖号码任意两个号码相同，即中奖<em class="red">6</em>元',
-      name: '任二'
+    // this.play_list 已在 Lottery类 中创建。-->  this.play_list = new Map(); // 存储初始化奖金和玩法及说明
+    this.play_list.set('r2', { // 'r2'为玩法简写
+      bonus: 6, // 奖金
+      tip: '从01~11中任选2个或多个号码，所选号码与开奖号码任意两个号码相同，即中奖<em class="red">6</em>元', // 玩法说明
+      name: '任二' // 玩法名称
     })
     .set('r3', {
       bonus: 19,
@@ -47,14 +48,18 @@ class Base {
   }
 
   /**
-   * [initNumber 初始化号码]
+   * [initNumber 初始化奖号]
    *
    * @memberof Base
    */
   initNumber () {
     for (let i = 1; i < 12; i++) {
-      this.number.add(('' + i).padStart(2, '0')) // 此处使用 set 数据结构是因为此处号码不能重复，而 set 中要求元素时唯一的，与 set 吻合
-    }
+      this.number.add(('' + i).padStart(2, '0'))
+    } 
+    // this.number 已在 Lottery类 中创建。  -->  this.number = new Set();  // 奖号
+    // 此处使用 set 数据结构是因为此处号码不能重复，而 set 中要求元素是唯一的，与 set 吻合
+    // this.number.add() 在Set对象(this.number)尾部添加一个元素。返回该Set对象。
+    // padStart() 方法用另一个字符串填充当前字符串,以便产生的字符串达到给定的长度
   }
 
   /**
@@ -64,15 +69,20 @@ class Base {
    */
   setOmit (omit) {
     let self = this;
+    // self.omit 已在 Lottery类 中创建。  -->  this.omit = new Map();
     self.omit.clear(); // 将遗落数据的值进行清空，此处的 omit 为 map 对象
+    // clear(): 移除Map对象中的所有元素
     // 将遗落数据保存在数据结构中
     for (let [index, item] of omit.entries()) {
-      //entries() 返回一个新的 Iterator 对象，它按插入顺序包含了Map对象中每个元素的 [key, value] 数组。
+      // entries() 返回一个新的 Iterator 对象，它按顺序插入Map对象中每个元素的 [key, value] 数组。
       self.omit.set(index, item)
+      // set() 方法为 Map 对象添加或更新一个指定了键（key）和值（value）的（新）键值对
     }
     // 将遗落数据保存在页面中
+    // self.omit_el 为页面显示遗漏的DOM
     $(self.omit_el).each(function (index, item) {
       $(item).text(self.omit.get(index));
+      // get() 方法返回某个 Map 对象中的一个指定元素。
     });
   }
 
@@ -110,13 +120,18 @@ class Base {
    * @memberof Base
    */
   changePlayNav (e) {
+    // e 为当前点击玩法的DOM的 event
     let self = this;
     let $cur = $(e.currentTarget);
-    $cur.addClass('active').siblings().removeClass('active');
-    self.cur_play = $cur.attr('desc').toLocaleLowerCase(); // toLocaleLowerCase() 用于把字符串转换为小写。
-    $('#zx_sm span').html(self.play_list.get(self.cur_play).tip);
-    $('.boll-list .btn-boll').removeClass('btn-boll-active'); // 切换玩法的时候，会把上一次的选项清空掉
-    self.getCount(); // 重新计算
+    // currentTarget: 可位于捕获、冒泡和目标阶段，始终指向绑定事件的元素
+    $cur.addClass('active').siblings().removeClass('active'); // 给当前点击的DOM，添加'active'类，移除其他同级DOM的'active'类
+    self.cur_play = $cur.attr('desc').toLocaleLowerCase(); // 获取当前DOM中自定义data中的玩法，并更新
+    // toLocaleLowerCase() 用于把字符串转换为小写。
+    $('#zx_sm span').html(self.play_list.get(self.cur_play).tip); 
+    // 获取玩法说明DOM，并更新玩法说明
+    // self.play_list 为 Lottery类 中初始化的所有玩法。self.play_list 为 set数据结构，所以使用 get 获取对应玩法
+    $('.boll-list .btn-boll').removeClass('btn-boll-active'); // 切换玩法的时候，将已选择的号码样式进行移除
+    self.getCount(); // 重新计算玩法所获奖金
   }
 
   /**
@@ -213,11 +228,13 @@ class Base {
     self.getTotal(); 
   }
 
+  // 计算所选玩法将获得的奖金
   getCount () {
     let self = this;
-    let active = $('.boll-list .btn-boll-active').length;
-    let count = self.computeCount(active, self.cur_play); // 计算当前注数
-    let range = self.computeBonus(active, self.cur_play); // 计算奖金范围
+    let active = $('.boll-list .btn-boll-active').length; // 通过已选号码的样式，获取所选的号码的个数（即注数）
+    // active 为所选号码个数（即注数），self.cur_play 为当前选中的玩法
+    let count = self.computeCount(active, self.cur_play); // 调用 Calculate类 中 computeCount()方法 计算当前注数
+    let range = self.computeBonus(active, self.cur_play); // 调用 Calculate类 中 computeCount()方法 计算奖金范围
     let money = count * 2; // 所花金钱
     let win1 = range[0] - money; // 最小盈利
     let win2 = range[1] - money; // 最大盈利
