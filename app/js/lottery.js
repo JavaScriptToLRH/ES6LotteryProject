@@ -105,10 +105,15 @@ class Lottery extends mix(Base, Calculate, Interface, Timer) {
   initEvent () {
     let self = this;
     // bind()方法创建一个新的函数，在调用时设置this关键字为提供的值
+    // 调用 Base类 中 changePlayNav方法，切换玩法，并重新计算玩法所获奖金
     $('#plays').on('click', 'li', self.changePlayNav.bind(self));
+    // 调用 Base类 中 toggleCodeActive方法，选择号码，并重新计算玩法所获奖金
     $('.boll-list').on('click', '.btn-boll', self.toggleCodeActive.bind(self));
+    // 点击确认选择号码DOM，调用 Base类 中 addCode方法，向 页面显示已选号的列表DOM 中添加已选择的号码，并计算总注数和总金额
     $('#confirm_sel_code').on('click', self.addCode.bind(self));
+    // 通过快捷选号，调用 Base类 中 assistHandle方法，实现快捷选号，计算所选玩法将获得的奖金
     $('.dxjo').on('click', 'li', self.assistHandle.bind(self));
+    // 通过选择机选列表中具体操作，调用 Base类 中 getRandomCode方法，实现机选操作。
     $('.qkmethod').on('click', '.btn-middle', self.getRandomCode.bind(self));
   }
 }

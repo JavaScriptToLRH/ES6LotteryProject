@@ -47,7 +47,10 @@ class Calculate {
     let arr = new Array(parseInt(play[1]) * 1).fill(0); // 创建一个与当前玩法基数相匹配的长度，并填充为 0 的一个数组
     let min, max; // 设置最小值与最大值变量
     if (play[0] === 'r') { // 对玩法进行区分，标识此处玩法为 任 X
-      let min_active = 5 - (11 - active);
+      let min_active = 5 - (11 - active); // 最小命中数
+      // min_active最小命中数。比如任8，11个数字，选择了8个，剩余3个数字没选
+      // 但是每次开奖5个数，所以至少有两个命中的。
+      // 任7最小命中数是1。最小命中数，对应 8->2, 7->1, (6,5,4,3,2)->0
       console.log('min_active', min_active)
       if (min_active > 0) {
         if (min_active - parseInt(play[1]) >= 0) {
