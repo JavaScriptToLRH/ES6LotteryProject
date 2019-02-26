@@ -9,6 +9,7 @@ import $ from 'jquery'
 // 深度拷贝 
 const copyProperties = function (target, source) {
   for (let key of Reflect.ownKeys(source)) {
+    // Reflect.ownKeys 返回一个由目标对象自身的属性键组成的数组
     if (key !== 'constructor' && key !== 'prototype' && key !== 'name') {
       let desc = Object.getOwnPropertyDescriptor(source, key);
       // Object.getOwnPropertyDescriptor() 返回指定对象上一个自有属性对应的属性描述符

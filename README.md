@@ -83,6 +83,7 @@ ES6相关语法可参考 `app/js/class` 目录下的 JavaScript文件
 ## 5. 项目备注
 
 + [gulp任务自动化参考](./readme/gulp.md)
++ [深拷贝与浅拷贝参考](https://juejin.im/post/59ac1c4ef265da248e75892b)
 
 ## 5.项目展示
 
